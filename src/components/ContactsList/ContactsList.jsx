@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types'; 
 import { useDispatch,useSelector  } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
 import { List, Item, Text, Button } from './ContactsList.styled';
@@ -11,6 +10,8 @@ export const ContactsList = ({ contact }) => {
    const dispatch = useDispatch();
 
   const getVisibleContacts = () => {
+    console.log(contacts)
+    contacts.map(contact => console.log(contact.ids))
     if (filter && filter.length > 0) {
       return contacts.filter(contact =>
           contact.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
