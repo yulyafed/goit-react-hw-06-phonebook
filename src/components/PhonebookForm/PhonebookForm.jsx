@@ -1,6 +1,8 @@
 import {  Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import { Button , Input, Label, FormPhone} from './PhonebookForm.styled';
+import { useDispatch } from 'react-redux';
+import { Button, Input, Label, FormPhone } from './PhonebookForm.styled';
+import { addContact } from 'redux/contactsSlice';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -11,11 +13,14 @@ const initialValues = {
   number: '',
 };
 
-export const PhonebookForm = ({ addContact }) => {
-  const handleSubmit = (values, { resetForm }) => {
-    addContact(values.name, values.number);
+export const PhonebookForm = () => {
+  const dispatch = useDispatch();
 
-    return resetForm();
+  const handleSubmit = event => {
+    event.preventDefault();
+    const form = event.target;
+    dispatch(addContact(form.elements.text.value));
+    form.reset();
   };
 
   return (
