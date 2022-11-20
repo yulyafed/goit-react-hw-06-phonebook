@@ -10,20 +10,27 @@ export const ContactsList = ({ contact }) => {
    const filter = useSelector(getFilter);
    const dispatch = useDispatch();
 
-  const getVisibleContacts = contacts.filter(contact =>
-    contact.name.toLocaleLowerCase().includes(filter));
+  const getVisibleContacts = () => {
+    if (filter && filter.length > 0) {
+      return contacts.filter(contact =>
+          contact.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+        );
+    }
 
-  const handleDelete = () => dispatch(deleteContact(contact.id));
+    return contacts;
+  }
+
+  const handleDelete = (id) => dispatch(deleteContact(id));
   
    return (
     <>
       <List>
-        {getVisibleContacts.map(contact => (
+        {getVisibleContacts().map(contact => (
           <Item key={contact.id}>
             <Text>
               {contact.name} : {contact.number}
             </Text>
-            <Button onClick={handleDelete}>Delete</Button>
+            <Button onClick={() => handleDelete(contact.id)}>Delete</Button>
           </Item>
         ))}
       </List>
