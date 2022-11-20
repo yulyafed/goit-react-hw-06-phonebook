@@ -16,9 +16,10 @@ const initialValues = {
 export const PhonebookForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const form = event.target;
+  const handleSubmit = e => {
+    
+    e.preventDefault();
+    const form = e.target;
     dispatch(addContact(form.elements.text.value));
     form.reset();
   };
