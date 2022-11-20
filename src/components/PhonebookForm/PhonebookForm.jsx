@@ -1,17 +1,6 @@
-import {  Formik, ErrorMessage } from 'formik';
-import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { Button, Input, Label, FormPhone } from './PhonebookForm.styled';
 import { addContact } from 'redux/contactsSlice';
-
-const schema = yup.object().shape({
-  name: yup.string().required(),
-});
-
-const initialValues = {
-  name: '',
-  number: '',
-};
 
 export const PhonebookForm = () => {
   const dispatch = useDispatch();
@@ -19,18 +8,14 @@ export const PhonebookForm = () => {
   const handleSubmit = e => {
     
     e.preventDefault();
-    const form = e.target;
-    dispatch(addContact(form.currentTarget.value));
+    const form = e.currentTarget;
+    dispatch(addContact(form.value));
     form.reset();
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={schema}
-    >
-      <FormPhone autoComplete="off">
+   
+    <FormPhone autoComplete="off" onSubmit={handleSubmit}>
         <Label htmlFor="name">
           Name
           <Input
@@ -40,8 +25,7 @@ export const PhonebookForm = () => {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
-          <ErrorMessage name="name" />
-        </Label>
+            </Label>
         <Label htmlFor="number">
           Number
           <Input
@@ -51,11 +35,9 @@ export const PhonebookForm = () => {
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
-          <ErrorMessage name="number" />
-        </Label>
+          </Label>
         <Button type="submit">Add contact</Button>
       </FormPhone>
-    </Formik>
-  );
+    );
 };
 

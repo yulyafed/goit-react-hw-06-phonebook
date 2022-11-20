@@ -1,7 +1,6 @@
-import { Form, Field } from 'formik';
 import styled from 'styled-components';
 
-export const FormPhone = styled(Form)`
+export const FormPhone = styled.form`
 display: flex;
 flex-direction: column;
 gap:16px;
@@ -10,7 +9,7 @@ width:40%;
 margin-left: 15px;
 `;
 
-export const Input = styled(Field)`
+export const Input = styled.input`
 margin-top: 5px;
 width: 200px;
 `;
