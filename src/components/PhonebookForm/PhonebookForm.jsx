@@ -20,7 +20,7 @@ export const PhonebookForm = () => {
     
     e.preventDefault();
     const form = e.target;
-    dispatch(addContact(form.elements.text.value));
+    dispatch(addContact(form.currentTarget.value));
     form.reset();
   };
 

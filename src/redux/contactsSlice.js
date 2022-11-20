@@ -13,27 +13,34 @@ const contactsSlice = createSlice({
     reducers: {
         addContact: {
             reducer(state, action) {
-                if (!state.some(contact => contact.name === action.payload)) {
-                    state.push(action.payload);
+                const nameContact = [];
+                for (const contact of state.contacts) { 
+                    nameContact.push(contact.name);
+                }
+                if (nameContact.includes(action.payload.name)) {
+                    alert(`${action.payload.name} is already in contacts`)
                     return;
                 }
-                alert(`${action.payload} is already in contacts`); 
+                state.contacts.push(action.payload);
             },
-            prepare(text) {
+            prepare(name, number) {
                 return {
                     payload: {
-                        text,
+                        name,
+                        number,
                         id: nanoid(),
                     },
                 };
             },
         },
         deleteContact(state, action) {
-            const index = state.findIndex(contact => contact.id === action.payload);
-            state.splice(index, 1);
+            state.contacts.splice(action.payload, 1);
+        },
+        filteredContacts(state, action) {
+            state.filter = action.payload;
         },
     },
 });
 
-export const { addContact, deleteContact } = contactsSlice.actions;
+export const { addContact, deleteContact, filteredContacts } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
