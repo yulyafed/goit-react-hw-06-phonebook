@@ -3,9 +3,11 @@ import { getContacts, getFilter } from 'redux/selectors';
 import { List, Item, Text, Button } from './ContactsList.styled';
 import { deleteContact } from 'redux/contactsSlice';
 
-export const ContactsList = ({ contact }) => {
+export const ContactsList = () => {
+
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
+
   const dispatch = useDispatch();
 
   const getVisibleContacts = () => {
@@ -36,12 +38,4 @@ export const ContactsList = ({ contact }) => {
   );
 };
 
-// ContactsList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-// };
+

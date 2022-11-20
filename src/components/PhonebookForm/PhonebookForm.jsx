@@ -3,6 +3,7 @@ import { Button, Input, Label, FormPhone } from './PhonebookForm.styled';
 import { addContact } from 'redux/contactsSlice';
 
 export const PhonebookForm = () => {
+
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -11,6 +12,7 @@ export const PhonebookForm = () => {
     const form = e.currentTarget;
     
     dispatch(addContact(form.elements.name.value, form.elements.number.value));
+
     form.reset();
   };
 
@@ -26,7 +28,7 @@ export const PhonebookForm = () => {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
-            </Label>
+        </Label>
         <Label htmlFor="number">
           Number
           <Input
